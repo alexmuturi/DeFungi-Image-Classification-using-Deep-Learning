@@ -2,7 +2,8 @@ import streamlit as st
 import tensorflow as tf
 from tensorflow.keras.preprocessing import image
 import numpy as np
-import pickle
+import PIL
+
 
 
 model_path = "mobilenetv2"  
@@ -53,27 +54,28 @@ st.set_page_config(
 
 st.sidebar.title("About")
 st.sidebar.info(
-    "This app classifies images of superficial fungi using MobileNetV2."
-    " Upload an image and click 'Predict' to get the model's predictions."
+    
+    ":man: Alex Muturi "
+    ":woman: Maryan Hajir"
+    ":man: Joe Malombe "
+    
 )
-
-
-
-st.title("Fungi Image Classifier")
-st.markdown("This app uses MobileNetV2 to classify images of superficial fungi.")
-
+st.title("Fungi Image Classification 🍄")
+"A simple transfer learning image classifier with MobileNetV2 base CNN "
+st.write ("Upload an image from the repository for a prediction")
 
 
 # Upload image through Streamlit
 uploaded_file = st.file_uploader("Choose an image...", type="jpg")
 
 
+
 if uploaded_file is not None:
     # Display the uploaded image
-    st.image(uploaded_file, caption="Uploaded Image.", use_column_width=True)
+    st.image(uploaded_file, caption="Uploaded Image.", use_column_width=False,width=300  )
 
     # Make predictions when the user clicks the "Predict" button
-    if st.button("Predict"):
+    if st.sidebar.button("Predict"):
         predictions = make_predictions(uploaded_file)
         st.subheader("Predictions:")
         for i, (label, score) in enumerate(predictions):
